@@ -300,6 +300,8 @@ class CallGraphVisitor(ast.NodeVisitor):
         for d in node.args.defaults:
             self.visit(d)
         for d in node.args.kw_defaults:
+            if d is None:
+                continue
             self.visit(d)
         for stmt in node.body:
             self.visit(stmt)
