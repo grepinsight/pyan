@@ -317,6 +317,7 @@ class CallGraphVisitor(ast.NodeVisitor):
 
     def visit_Lambda(self, node):
         self.logger.debug("Lambda")
+        self.logger.debug(f"linenumber: {node.lineno}")
         with ExecuteInInnerScope(self, "lambda"):
             for d in node.args.defaults:
                 self.visit(d)
@@ -595,6 +596,7 @@ class CallGraphVisitor(ast.NodeVisitor):
 
     def visit_GeneratorExp(self, node):
         self.logger.debug("GeneratorExp")
+        self.logger.debug(f"lineno: {node.lineno}")
         with ExecuteInInnerScope(self, "genexpr"):
             self.visit(node.elt)
             self.analyze_generators(node.generators)
